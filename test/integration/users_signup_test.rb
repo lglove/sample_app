@@ -6,11 +6,13 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     get signup_path
     assert_no_difference 'User.count' do
       post users_path, user: {
-        name: "aaaaaa", email: "user@invalid.com",
-        password: "hai", password_confirmation: "hai"
+        name: "  ", email: "user@invalid..com",
+        password: "hijai", password_confirmation: "hai"
       }
     end
     assert_template 'users/new'
+    assert_select 'div#<CSS id for error explation>'
+    assert_select 'div.<CSS class for field with error>'
   end
 
   test "valid signup information" do
@@ -23,6 +25,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
         password: password, password_confirmation: password
       }
       assert_template '/'
+      assert_not flash.empty?
     end
   end
 end
