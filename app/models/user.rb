@@ -11,13 +11,35 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: { minimum: 6 }
 
   #返回指定字符串的哈希摘要
-  def User.digest(string)
+  #def User.digest(string)
+    #cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    #BCrypt::Password.create(string, cost: cost)
+  #end
+
+  #返回指定字符串的哈希摘要 的另一种写法
+  #def self.digest(string)
+  #  cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+  #  BCrypt::Password.create(string, cost: cost)
+  #end
+
+  #返回指定字符串的哈希摘要 的第三种写法
+  def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
 
   #返回一个随机令牌
-  def User.new_token
+  #def User.new_token
+  #  SecureRandom.urlsafe_base64
+  #end
+
+  #返回一个随机令牌的另一种写法
+  #def self.new_token
+  #  SecureRandom.urlsafe_base64
+  #end
+
+  #返回一个随机令牌的第三种写法
+  def self.new_token
     SecureRandom.urlsafe_base64
   end
 
