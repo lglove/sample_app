@@ -1,9 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString1
-  email: MyString1
-
-two:
-  name: MyStringw
-  email: MyStringw
+michael:
+   name: Michael Example
+   email: michael@example.com
+   password_digest: <%= User.digest('password') %>
+   #这里我们无法在固件中实现password的属性，因为rails会提示数据库没有这个列，所以我们是
+   #约定的固件中所有的用吗密码都一样为'password'
